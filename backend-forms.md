@@ -281,6 +281,7 @@ There are various native field types that can be used for the **type** setting. 
 - [Text](#field-text)
 - [Number](#field-number)
 - [Password](#field-password)
+- [Email](#field-email)
 - [Textarea](#field-textarea)
 - [Dropdown](#field-dropdown)
 - [Radio List](#field-radio)
@@ -323,6 +324,15 @@ There are various native field types that can be used for the **type** setting. 
     user_password:
         label: Password
         type: password
+
+<a name="field-email"></a>
+### Email
+
+`email` - renders a single line text box with the type of `email` for browser based verification that the provided input matches a properly formated email address.
+
+    user_email:
+        label: Email Address
+        type: email
 
 <a name="field-textarea"></a>
 ### Textarea
@@ -430,7 +440,7 @@ Radio lists can also support a secondary description.
             registered: [Registered only, Only logged in member will be able to access this page.]
             guests: [Guests only, Only guest users will be able to access this page.]
 
-Radio lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown). For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**
+Radio lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown). For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**. Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the radio field config.
 
 <a name="field-balloon"></a>
 ### Balloon Selector
@@ -875,6 +885,7 @@ Option | Description
 ------------- | -------------
 **nameFrom** | a model attribute name used for displaying the relation label. Default: name.
 **select** | a custom SQL select statement to use for the name.
+**order** | an order clause to sort options by. Example: `name desc`.
 **emptyOption** | text to display when there is no available selections.
 **scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always.
 
