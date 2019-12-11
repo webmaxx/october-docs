@@ -205,30 +205,33 @@ Option | Description
 **stretch** | specifies if this tab stretches to fit the parent height.
 **defaultTab** | the default tab to assign fields to. Default: Misc.
 **icons** | assign icons to tabs using tab names as the key.
+**lazy** | array of tabs to be loaded dynamically when clicked. Useful for tabs that contain large amounts of content.
 **cssClass** | assigns a CSS class to the tab container.
 **paneCssClass** | assigns a CSS class to an individual tab pane. Value is an array, key is tab index or label, value is the CSS class. It can also be specified as a string, in which case the value will be applied to all tabs.
 
     tabs:
         stretch: true
-        defaultTab: backend::lang.account.default_tab
+        defaultTab: User
         cssClass: text-blue
+        lazy:
+            - Groups
         paneCssClass:
             0: first-tab
             1: second-tab
         icons:
-            backend::lang.account.user: icon-user
-            backend::lang.account.groups: icon-group
+            User: icon-user
+            Groups: icon-group
 
         fields:
             username:
                 type: text
                 label: Username
-                tab: backend::lang.account.user
+                tab: User
 
             groups:
                 type: relation
                 label: Groups
-                tab: backend::lang.account.groups
+                tab: Groups
 
 <a name="form-field-options"></a>
 ### Field options
@@ -316,6 +319,17 @@ There are various native field types that can be used for the **type** setting. 
         step: 1  # defaults to 'any'
         min: 1   # defaults to not present
         max: 100 # defaults to not present
+        
+If you would like to validate this field server-side on save to ensure that it is numeric, please use the `$rules` property on your model, like so:
+
+    /**
+     * @var array Validation rules
+     */
+    public $rules = [
+        'your_age' => 'numeric',
+    ];
+    
+For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-numeric).
 
 <a name="field-password"></a>
 ### Password
@@ -329,11 +343,22 @@ There are various native field types that can be used for the **type** setting. 
 <a name="field-email"></a>
 ### Email
 
-`email` - renders a single line text box with the type of `email` for browser based verification that the provided input matches a properly formated email address.
+`email` - renders a single line text box with the type of `email`, triggering an email-specialised keyboard in mobile browsers.
 
     user_email:
         label: Email Address
         type: email
+        
+If you would like to validate this field on save to ensure that it is a properly-formatted email address, please use the `$rules` property on your model, like so:
+
+    /**
+     * @var array Validation rules
+     */
+    public $rules = [
+        'user_email' => 'email',
+    ];
+    
+For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-email).
 
 <a name="field-textarea"></a>
 ### Textarea
