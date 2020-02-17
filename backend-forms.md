@@ -319,7 +319,7 @@ There are various native field types that can be used for the **type** setting. 
         step: 1  # defaults to 'any'
         min: 1   # defaults to not present
         max: 100 # defaults to not present
-        
+
 If you would like to validate this field server-side on save to ensure that it is numeric, please use the `$rules` property on your model, like so:
 
     /**
@@ -328,7 +328,7 @@ If you would like to validate this field server-side on save to ensure that it i
     public $rules = [
         'your_age' => 'numeric',
     ];
-    
+
 For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-numeric).
 
 <a name="field-password"></a>
@@ -348,7 +348,7 @@ For more information on model validation, please visit [the documentation page](
     user_email:
         label: Email Address
         type: email
-        
+
 If you would like to validate this field on save to ensure that it is a properly-formatted email address, please use the `$rules` property on your model, like so:
 
     /**
@@ -357,7 +357,7 @@ If you would like to validate this field on save to ensure that it is a properly
     public $rules = [
         'user_email' => 'email',
     ];
-    
+
 For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-email).
 
 <a name="field-textarea"></a>
@@ -502,7 +502,7 @@ Balloon selectors support three ways of defining the options, exactly like the [
         type: checkboxlist
         # set to true to explicitly enable the "Select All", "Select None" options
         # on lists that have <=10 items (>10 automatically enables it)
-        quickselect: true 
+        quickselect: true
         options:
             open_account: Open account
             close_account: Close account
@@ -735,9 +735,7 @@ Option | Description
 **maxDate** | the maximum/latest date that can be selected. Default: 2020-12-31.
 **firstDay** | the first day of the week. Default: 0 (Sunday).
 **showWeekNumber** | show week numbers at head of row. Default: false
-**ignoreTimezone** | display datetime exactly as it is stored, ignoring October's and the backend user's specified timezones.
-
-> **Note:** If you are using `mode: date`, you may also want to set `ignoreTimezone: true` as the differences in timezones can cause dates stored in the database to become off by one day on either end depending on the difference between the app timezone and the backend timezone of the user at the time of entry.
+**ignoreTimezone** | store date and time exactly as it is displayed, ignoring the backend specified timezone preference.
 
 <a name="widget-fileupload"></a>
 ### File upload
@@ -943,6 +941,7 @@ Option | Description
 **minItems** | minimum items required. Pre-displays those items when not using groups. For example if you set **'minItems: 1'** the first row will be displayed and not hidden.
 **maxItems** | maximum number of items to allow within the repeater.
 **groups** | references a group of form fields placing the repeater in group mode (see below). An inline definition can also be used.
+**style** | the behavior style to apply for repeater items. Can be one of the following: `default`, `collapsed` or `accordion`. See the **Repeater styles** section below for more information.
 
 The repeater field supports a group mode which allows a custom set of fields to be chosen for each iteration.
 
@@ -991,6 +990,14 @@ Option | Description
 **fields** | form fields belonging to the group, see [backend form fields](#form-fields).
 
 > **Note**: The group key is stored along with the saved data as the `_group` attribute.
+
+#### Repeater styles
+
+The `styles` attribute of the repeater widget controls the behaviour of repeater items. There are three different types of styles available for developers:
+
+- **default:** Shows all the repeater items as expanded on page load. This is the default current behavior, and will be used if style is not defined in the repeater widget's configuration.
+- **collapsed:** Shows all the repeater items as collapsed (minimised) on page load. The user can collapse or expand items as they wish.
+- **accordion:** Shows only the first repeater item as expanded on load, with all others collapsed. When another item is exanded, any other expanded item is collapsed, effectively making it so that only one item is expanded at a time.
 
 <a name="widget-richeditor"></a>
 ### Rich editor / WYSIWYG
