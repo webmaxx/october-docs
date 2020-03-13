@@ -250,7 +250,7 @@ Option | Description
 **comment** | places a descriptive comment below the field.
 **commentAbove** | places a comment above the field.
 **commentHtml** | allow HTML markup inside the comment. Options: true, false.
-**default** | specifies the default value for the field.
+**default** | specify the default value for the field. For `dropdown`, `checkboxlist`, `radio` and `balloon-selector` widgets, you may specify an option key here to have it selected by default.
 **defaultFrom** | takes the default value from the value of another field.
 **tab** | assigns the field to a tab.
 **cssClass** | assigns a CSS class to the field container.
@@ -380,6 +380,7 @@ For more information on model validation, please visit [the documentation page](
     status_type:
         label: Blog Post Status
         type: dropdown
+        default: published
         options:
             draft: Draft
             published: Published
@@ -453,6 +454,7 @@ By default the dropdown has a searching feature, allowing quick selection of a v
     security_level:
         label: Access Level
         type: radio
+        default: guests
         options:
             all: All
             registered: Registered only
@@ -478,6 +480,7 @@ Radio lists support three ways of defining the options, exactly like the [dropdo
     gender:
         label: Gender
         type: balloon-selector
+        default: female
         options:
             female: Female
             male: Male
@@ -505,6 +508,7 @@ Balloon selectors support three ways of defining the options, exactly like the [
         # set to true to explicitly enable the "Select All", "Select None" options
         # on lists that have <=10 items (>10 automatically enables it)
         quickselect: true
+        default: open_account
         options:
             open_account: Open account
             close_account: Close account
@@ -654,7 +658,6 @@ If the `availableColors` field in not defined in the YAML file, the colorpicker 
         fieldName: null
         height: false
         keyFrom: id
-        postbackHandlerName: null
         recordsPerPage: false
         searching: false
         toolbar: []
@@ -675,7 +678,7 @@ Option | Description
 **fieldName** | defines a custom field name to use in the POST data sent from the data table. Leave blank to use the default field alias.
 **height** | the data table's height, in pixels. If set to `false`, the data table will stretch to fit the field container.
 **keyFrom** | the data attribute to use for keying each record. This should usually be set to `id`.
-**postbackHandlerName** | defines a custom post-back handler to use when saving the data from the data table.
+**postbackHandlerName** | specifies the AJAX handler name in which the data table content will be sent with. When set to `null` (default), the handler name will be auto-detected from the request name used by the form which contains the data table. It is recommended to keep this as `null`.
 **recordsPerPage** | the number of records to show per page. If set to `false`, the pagination will be disabled.
 **searching** | allow records to be searched via a search box. Default: `false`.
 **toolbar** | an array representing the toolbar configuration of the data table.
@@ -987,7 +990,7 @@ Each group must specify a unique key and the definition supports the following o
 Option | Description
 ------------- | -------------
 **name** | the name of the group.
-**description** | a breif description of the group.
+**description** | a brief description of the group.
 **icon** | defines an icon for the group, optional.
 **fields** | form fields belonging to the group, see [backend form fields](#form-fields).
 
